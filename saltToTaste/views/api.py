@@ -1,5 +1,6 @@
 import os
 import argparse
+import logging
 from flask import Blueprint, jsonify, request, abort
 from datetime import datetime
 from functools import wraps
@@ -135,7 +136,7 @@ def update_recipes_json(recipe_id):
             recipe['notes'].append(note.name)
 
     if recipe_query.title != recipe['title']:
-        print (f' * Recipe title was changed so the recipe is being replaced.')
+        logging.info(f'Recipe title was changed so the recipe is being replaced.')
         delete_recipe_file(recipe.filename)
         delete_recipe_image(recipe.image_path)
         delete_recipe(recipe_query.id)
