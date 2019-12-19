@@ -2,7 +2,7 @@ import os
 
 def create_flask_secret(DATA_DIR):
     # if not os.path.isfile('saltToTaste.secret'):
-    print (f' * Creating Flask secret')
+    print (f' * Creating Flask secret', flush=True)
     f = open(f'{DATA_DIR}/saltToTaste.secret', 'w+', encoding='utf-16')
     secret = os.urandom(24).hex()
     f.write(f'{secret}')
