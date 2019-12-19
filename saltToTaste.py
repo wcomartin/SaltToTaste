@@ -7,7 +7,7 @@ from saltToTaste.parser_handler import argparser_results
 argument = argparser_results()
 DATA_DIR = os.path.abspath(argument['DATA_DIR'])
 
-logging.basicConfig(filename=f'{DATA_DIR}/saltToTaste.log',level=logging.DEBUG, format='%(asctime)s - %(levelname)s : %(message)s')
+logging.basicConfig(filename=f'{DATA_DIR}/logs/saltToTaste.log',level=logging.DEBUG, format='%(asctime)s - %(levelname)s : %(message)s')
 app = create_app()
 host = "0.0.0.0"
 port = 8100
