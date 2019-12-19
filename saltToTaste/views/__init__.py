@@ -1,8 +1,8 @@
 import os
-from saltToTaste.argument_handler import parser_results
+from saltToTaste.parser_handler import argparser_results
 from saltToTaste.file_handler import create_api_key
 
-argument = parser_results()
+argument = argparser_results()
 DATA_DIR = os.path.abspath(argument['DATA_DIR'])
 
 # Create the DATA_DIR if it doesn't exist

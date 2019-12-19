@@ -1,12 +1,12 @@
 import argparse
 
-def create_parser():
+def create_argparser():
     parser = argparse.ArgumentParser(description='A Flask based recipe platform')
     parser.add_argument('--datadir', help='Specify a directory to store your data files')
     return parser
 
-def parser_results():
-    parser = create_parser()
+def argparser_results():
+    parser = create_argparser()
     args = parser.parse_args()
     results = {
         'DATA_DIR' : None

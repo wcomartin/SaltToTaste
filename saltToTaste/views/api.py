@@ -8,7 +8,6 @@ from saltToTaste.models import Recipe
 from saltToTaste.database_handler import get_recipes, get_recipe, delete_recipe, add_recipe, update_recipe
 from saltToTaste.search_handler import search_parser
 from saltToTaste.recipe_handler import delete_recipe_file, delete_recipe_image, add_recipe_file, download_image
-from saltToTaste.argument_handler import parser_results
 
 api = Blueprint('api', __name__)
 
