@@ -36,7 +36,7 @@ COPY . /app
 
 ENTRYPOINT [ "python3" ]
 
-CMD [ "saltToTaste.py", "--datadir", "/config" ]
+CMD [ "saltToTaste.py", "-u", "--datadir", "/config" ]
 
 VOLUME /config
 EXPOSE 8100
