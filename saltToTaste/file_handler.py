@@ -1,6 +1,8 @@
 import os
 import logging
 
+logging.basicConfig(filename='saltToTaste.log',level=logging.DEBUG)
+
 def create_flask_secret(DATA_DIR):
     # if not os.path.isfile('saltToTaste.secret'):
     logging.info(f' * Creating Flask secret')
