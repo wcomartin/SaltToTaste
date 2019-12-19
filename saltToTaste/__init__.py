@@ -8,10 +8,10 @@ from saltToTaste.models import Recipe, Ingredient, Note, User, Tag, Direction
 from saltToTaste.recipe_handler import recipe_importer
 from saltToTaste.database_handler import add_all_recipes, update_recipes, add_new_recipes, remove_missing_recipes, db_cleanup
 from saltToTaste.file_handler import create_flask_secret, create_api_key
-from saltToTaste.argument_handler import parser_results
+from saltToTaste.parser_handler import argparser_results
 
 def create_app(config_file='settings.py'):
-    argument = parser_results()
+    argument = argparser_results()
     DATA_DIR = os.path.abspath(argument['DATA_DIR'])
 
     app = Flask(__name__)
