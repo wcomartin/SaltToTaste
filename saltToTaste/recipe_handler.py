@@ -1,4 +1,7 @@
-import os, re, requests
+import os
+import re
+import requests
+import logging
 from collections import defaultdict
 from  datetime import datetime
 
@@ -85,7 +88,7 @@ def delete_recipe_file(filename):
     file_path = f'./_recipes/{filename}'
     if os.path.exists(file_path):
         os.remove(file_path)
-        print (f' - Deleting {filename} from disk')
+        logging.info(f'Deleting {filename} from disk')
         return True
     else:
         return False
@@ -94,12 +97,12 @@ def delete_recipe_image(image):
     image_path = f'./saltToTaste/static/recipe_images/{image}'
     if os.path.exists(image_path):
         os.remove(image_path)
-        print (f' - Deleting {image} from disk')
+        logging.info(f'Deleting {image} from disk')
 
 def download_image(link, title_formatted):
     r = requests.get(link)
     open(f'./saltToTaste/static/recipe_images/{title_formatted}.jpg', 'wb').write(r.content)
-    print (f' + Saved {title_formatted}.jpg to disk')
+    logging.info(f'Saved {title_formatted}.jpg to disk')
 
 def add_recipe_file(recipe_data):
     formatted_title = recipe_data["title"].replace(" ", "_").lower()
@@ -144,4 +147,4 @@ def add_recipe_file(recipe_data):
     else:
         f.write('\nnotes: \n')
     f.close()
-    print (f' + Saved {formatted_title}.txt to disk')
+    logging.info(f'Saved {formatted_title}.txt to disk')

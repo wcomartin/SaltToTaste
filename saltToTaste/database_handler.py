@@ -1,3 +1,4 @@
+import logging
 from saltToTaste.extensions import db
 from saltToTaste.models import Recipe, Tag, Ingredient, Direction, Note
 
@@ -21,7 +22,7 @@ def get_recipe_by_title_f(title_formatted):
 
 def add_recipe(recipe_data):
     if not Recipe.query.filter(Recipe.filename == recipe_data['filename']).first():
-        print (f' + Inserting {recipe_data["filename"]} into database')
+        logging.info(f'Inserting {recipe_data["filename"]} into database')
         recipe = Recipe(layout=recipe_data['layout'], title=recipe_data['title'], title_formatted=recipe_data['title'].lower().replace(' ', '_'))
         if recipe_data['image']:
             recipe.image_path = recipe_data['image']
@@ -81,7 +82,7 @@ def add_recipe(recipe_data):
 def delete_recipe(id):
     recipe = Recipe.query.filter(Recipe.id == id).first()
     if recipe:
-        print (f' - Removing {recipe.title} from database')
+        logging.info(f'Removing {recipe.title} from database')
 
         recipe.tags.clear()
         recipe.ingredients.clear()
@@ -99,7 +100,7 @@ def delete_recipe_by_filename(filename):
     delete_recipe(recipe.id)
 
 def update_recipe(recipe_data): # this only gets used if the title has not been changed which means the filename doesnt change
-    print (f' + Updating {recipe_data["title"]}')
+    logging.info(f'Updating {recipe_data["title"]}')
     recipe_query = Recipe.query.filter(Recipe.filename == recipe_data['filename']).first()
 
     recipe_query.layout = recipe_data['layout']
@@ -147,26 +148,26 @@ def update_recipe(recipe_data): # this only gets used if the title has not been 
     db.session.commit()
 
 def update_recipes(recipe_list):
-    print (' * Checking for altered recipes')
+    logging.info('Checking for altered recipes')
     for recipe in recipe_list:
         recipe_query = Recipe.query.filter(Recipe.filename == recipe['filename']).first()
         if recipe_query.file_last_modified != recipe['last_modified']:
             update_recipe(recipe)
 
 def add_all_recipes(recipe_list):
-    print (' * Initial insert of recipes')
+    logging.info('Initial insert of recipes')
     for recipe in recipe_list:
         add_recipe(recipe)
 
 def add_new_recipes(recipe_list):
-    print (' * Checking for new recipes')
+    logging.info('Checking for new recipes')
     db_recipes = [x.filename for x in Recipe.query.all()]
     for recipe in recipe_list:
         if recipe['filename'] not in db_recipes:
             add_recipe(recipe)
 
 def remove_missing_recipes(recipe_list):
-    print (' * Checking for missing recipes to remove')
+    logging.info('Checking for missing recipes to remove')
     db_recipes = [x.filename for x in Recipe.query.all()]
     recipe_files = [x['filename'] for x in recipe_list]
     for filename in db_recipes:
@@ -174,7 +175,7 @@ def remove_missing_recipes(recipe_list):
             delete_recipe_by_filename(filename)
 
 def db_cleanup():
-    print (f' * Cleaning up database')
+    logging.info(f'Cleaning up database')
     tags = Tag.query.all()
     ingredients = Ingredient.query.all()
     directions = Direction.query.all()
