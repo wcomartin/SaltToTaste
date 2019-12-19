@@ -42,3 +42,7 @@ def download_recipe(filename):
 @main.route("/image/<path:filename>", methods=['GET'])
 def image_path(filename):
     return send_from_directory(current_app.config["RECIPE_IMAGES"], filename)
+
+@main.route("/settings")
+def settings():
+    return render_template("settings.html")
