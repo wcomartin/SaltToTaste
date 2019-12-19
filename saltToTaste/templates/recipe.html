@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+
+{% block title_container %}
+  <title>{{ recipe.title }}</title>
+{% endblock %}
+
+{% block body_container %}
+  <div class="container-fluid">
+    <div class="details">
+      <div class="details-info">
+        <div class="details-info-title">
+          {{ recipe.title }}
+          <a href="/download/{{ recipe.filename }}" title="Download recipe">
+          <a href="{{ url_for('main.download_recipe', filename=recipe.filename) }}" title="Download recipe">
+            <i class="fas fa-file-download fa-xs"></i>
+          </a>
+        </div>
+        <div class="details-info-tags">
+          {% for tag in recipe.tags %}
+            <a onclick="tagSearch('tag:{{ tag }}')" href="/">
+              <div class="details-tag {{ tag | replace (' ', '-') }}">
+                {% if tag == 'vegetarian' %}
+                  <i class="fas fa-leaf"></i> {{ tag.title() }}
+                {% elif tag == 'quick meal' %}
+                  <i class="fas fa-stopwatch"></i> {{ tag.title() }}
+                {% else %}
+                  {{ tag.title() }}
+                {% endif %}
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+        <ul class="details-info-list">
+          <li class="list-item">
+            <i class="fas fa-clock fa-2x"></i>
+            <div class='list-item-heading'>Time</div>
+            <div class="list-item-value">
+              {{ recipe.ready }}
+            </div>
+          </li>
+          <li class="list-item">
+            <i class="fas fa-utensils fa-2x"></i>
+            <div class='list-item-heading'>Servings</div>
+            <div class="list-item-value">
+              {{ recipe.servings }}
+            </div>
+          </li>
+          <li class="list-item">
+            <i class="fas fa-fire fa-2x"></i>
+            <div class='list-item-heading'>Nutrition</div>
+            <div class="list-item-value">
+              {{ recipe.calories }} calories
+            </div>
+          </li>
+        </ul>
+        {% if recipe.notes %}
+          <div class="notes">
+            <div class="notes-title">
+              Notes
+            </div>
+            <div class="notes-list">
+              <ul>
+                {% for note in recipe.notes %}
+                  {% if note != '' %}
+                    <li>{{ note }}</li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        {% endif %}
+        <div class="details-info-description">
+          <p>{{ recipe.description }}</p>
+        </div>
+      </div>
+      <div class="details-image" style="background-image: url('{{ url_for('main.image_path', filename=recipe.image_path) }}')">
+      </div>
+    </div>
+    <div class="ingredients">
+      <div class="ingredients-title">
+        Ingredients
+      </div>
+      <div class="ingredients-list">
+        <ul>
+          {% for ingredient in ingredients_list[0] %}
+            {% if ingredient != '- ' %}
+              <li>{{ ingredient }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+        <ul>
+          {% for ingredient in ingredients_list[1] %}
+            {% if ingredient != '- ' %}
+              <li>{{ ingredient }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="directions">
+      <div class="directions-title">
+        Directions
+      </div>
+      <div class="directions-list">
+        {% for direction in recipe.directions %}
+          {% if direction != '' %}
+            <div class="direction-item">
+              <div class="direction-title">
+                Step {{ loop.index }}
+              </div>
+              <div class="direction-details">
+                {{ direction }}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

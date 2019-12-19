@@ -1,1 +1,1 @@
-# SaltToTaste
+# Salt-to-Taste

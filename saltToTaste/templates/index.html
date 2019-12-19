@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title_container %}
+  <title>Salt To Taste</title>
+{% endblock %}
+
+{% block body_container %}
+  <div class="container-fluid">
+    {% for recipe in recipes %}
+      <div class="recipe-box" style="background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0), rgba(0,0,0,1)), url('{{ url_for('main.image_path', filename=recipe.image_path) }}');">
+        <a href="{{ url_for('main.recipe', recipe_link=recipe.title_formatted) }}">
+          <div class="recipe-box-content">
+            <div class="recipe-box-title">
+              {{ recipe.title }}
+            </div>
+          </div>
+        </a>
+        <div class="recipe-box-tags">
+          {% for tag in recipe.tags %}
+            <a onclick="tagSearch('tag:{{ tag }}')" href="#">
+              <div class="recipe-box-tag {{ tag | replace (' ', '-') }}">
+                {% if tag == 'vegetarian' %}
+                  <i class="fas fa-leaf"></i> {{ tag.title() }}
+                {% elif tag == 'quick meal' %}
+                  <i class="fas fa-stopwatch"></i> {{ tag.title() }}
+                {% else %}
+                  {{ tag.title() }}
+                {% endif %}
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
