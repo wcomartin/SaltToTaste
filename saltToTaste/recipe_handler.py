@@ -74,7 +74,8 @@ def recipe_parser(recipe, directory, encoding='utf-16'):
 
 def recipe_formater(recipe):
     recipe['title'] = recipe['title'].strip('"')
-    recipe['tags'] = recipe['tags'].split(', ')
+    if recipe['tags']:
+        recipe['tags'] = recipe['tags'].split(', ')
     recipe['ingredients'] = [x.lstrip('- ') for x in recipe['ingredients']]
     recipe['directions'] = [x.lstrip('- ') for x in recipe['directions']]
     recipe['notes'] = [x.lstrip('- ') for x in recipe['notes']]
