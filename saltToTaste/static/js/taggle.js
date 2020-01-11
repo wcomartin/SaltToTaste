@@ -155,7 +155,7 @@
          * Placeholder string to be placed in an empty taggle field
          * @type {String}
          */
-        placeholder: 'Enter tags...',
+        placeholder: 'Search',
 
         /**
          * Keycodes that will add a tag
