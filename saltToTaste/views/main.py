@@ -13,7 +13,7 @@ def index():
     recipes = sorted(get_recipes(), key = lambda i: i['title'])
 
     if request.method == 'POST':
-        search_data = request.form['search']
+        search_data = request.form.getlist('taggles[]')
         if search_data:
             results = search_parser(search_data)
             return render_template("index.html", recipes=results)
