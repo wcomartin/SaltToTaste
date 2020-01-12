@@ -214,6 +214,11 @@ body {
   background-color: #960000;
 }
 
+.code-tag {
+  background-color: #E2E1DF;
+  color: #212529;
+}
+
 /* Bootstrap overrides */
 .btn-primary {
   background-color: #960000 !important;

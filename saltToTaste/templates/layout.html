@@ -130,25 +130,25 @@
           <div class="modal-body">
             <b>Basic search:</b>
             <ul>
-              <li><code>Search blocks</code> are added by entering your search then pressing <b>enter</b>, clicking on the <b>add item</b> option that appears, or inputing a comma (<b>,</b>).</li>
+              <li><code class="rounded p-1 code-tag">Search blocks</code> are added by entering your search then pressing <b>enter</b>, clicking on the <b>add item</b> option that appears, or inputing a comma (<b>,</b>).</li>
               <li>Search blocks can be removed with <b>backspace</b> and you can use the arrow keys to move between them.</li>
               <li>Each search block of a like kind (see advanced search) is connected by an implicit <b>OR</b> condition. This means recipes with a match to any block will be returned.</li>
               <li>Items within a search block are connected by an implicit <b>AND</b>, as a result all individual words in a block will need to match a recipe.</li>
               <li>A basic search looks through the recipe title and description.</li>
               <li>Items are returned in the order they are searched.</li>
-              <b>Example:</b> <code>chicken</code>   <code>broccoli</code> will return all recipes with chicken or broccoli (in that order) in the title/description.
-              <br><b>Example:</b> <code>beef rice</code> will return all recipes with beef and rice in the title/description.
+              <b>Example:</b> <code class="rounded p-1 code-tag">chicken</code>   <code class="rounded p-1 code-tag">broccoli</code> will return all recipes with chicken or broccoli (in that order) in the title/description.
+              <br><b>Example:</b> <code class="rounded p-1 code-tag">beef rice</code> will return all recipes with beef and rice in the title/description.
           </ul>
           <b>Advanced search:</b>
           <ul>
-            <li>There are several key terms that when followed with a colon (<b>:</b>) scope the search to specific sections of the recipe. These are: <code>title:</code>,   <code>tag:</code>,   <code>ingredient:</code>,   <code>direction:</code>,   <code>calories:</code>,   <code>note:</code>. Items without a key are considered <code>general</code>.</li>
+            <li>There are several key terms that when followed with a colon (<b>:</b>) scope the search to specific sections of the recipe. These are: <code class="rounded p-1 code-tag">title:</code>,   <code class="rounded p-1 code-tag">tag:</code>,   <code class="rounded p-1 code-tag">ingredient:</code>,   <code class="rounded p-1 code-tag">direction:</code>,   <code class="rounded p-1 code-tag">calories:</code>,   <code class="rounded p-1 code-tag">note:</code>. Items without a key are considered <code class="rounded p-1 code-tag">general</code>.</li>
             <li>Only <b>one</b> key term can be used per search block and it must be at the start of the block.</li>
             <li>Search blocks containing the same key are considered of <b>like kind</b> and conntected by an implicit <b>OR</b> condition.</li>
-            <li><b>Within</b> a search block <b>AND</b> and <b>OR</b> operators can be used to futher reduce or expand the search results. Additionally terms can be grouped within parentheses <code><b>(</b>term AND term<b>)</b></code>.</li>
+            <li><b>Within</b> a search block <b>AND</b> and <b>OR</b> operators can be used to futher reduce or expand the search results. Additionally terms can be grouped within parentheses <code class="rounded p-1 code-tag"><b>(</b>term AND term<b>)</b></code>.</li>
             <li>Using the key terms combined with the search operators reduces the number of search blocks needed and allows for more specific results.</li>
-            <li><b>Note:</b> The <code>calories:</code> key term will supersede the order of the results to be from lowest to highest calorie count, the <code>tag:</code> key term spelling needs to be an <b>exact match</b>, <code>ingredient:</code> searching is done per ingredient.</li>
-            <b>Example:</b> <code>ingredient:(rice OR farro) AND chicken</code> will return no results as a single ingredient will not contain 2 unique ingredient items. An alternative search would be <code>ingredient:rice OR farro</code>   <code>title:chicken</code>, this will return all results with an ingredient that has farro or rice and a title with chicken.
-            <br><b>Example:</b> <code>ingredient:tomato</code>   <code>tag:vegetarian</code> would find all the recipes with tomato as an ingredient and a tag of vegetarian.
+            <li><b>Note:</b> The <code class="rounded p-1 code-tag">calories:</code> key term will supersede the order of the results to be from lowest to highest calorie count, the <code class="rounded p-1 code-tag">tag:</code> key term spelling needs to be an <b>exact match</b>, <code class="rounded p-1 code-tag">ingredient:</code> searching is done per ingredient.</li>
+            <b>Example:</b> <code class="rounded p-1 code-tag">ingredient:(rice OR farro) AND chicken</code> will return no results as a single ingredient will not contain 2 unique ingredient items. An alternative search would be <code class="rounded p-1 code-tag">ingredient:rice OR farro</code>   <code class="rounded p-1 code-tag">title:chicken</code>, this will return all results with an ingredient that has farro or rice and a title with chicken.
+            <br><b>Example:</b> <code class="rounded p-1 code-tag">ingredient:tomato</code>   <code class="rounded p-1 code-tag">tag:vegetarian</code> would find all the recipes with tomato as an ingredient and a tag of vegetarian.
           </ul>
           </div>
           <div class="modal-footer">
