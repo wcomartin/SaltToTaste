@@ -31,7 +31,8 @@ COPY ./requirements.txt /app/requirements.txt
 WORKDIR /app
 
 RUN \
-  pip3 install -r requirements.txt && \
+  pip3 install --no-cache-dir --upgrade pip && \
+  pip3 install --no-cache-dir -r requirements.txt && \
   # Workaround for Flask-WhooshAlchemy3 having SQLALchemy 1.1.13 in its requirements.txt
   pip3 install sqlalchemy --upgrade
 
