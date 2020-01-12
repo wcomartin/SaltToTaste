@@ -84,12 +84,12 @@ body {
   z-index: 2;
 }
 
-.recipe-card-tags a {
+.recipe-card-tags a, .recipe-details-tags a {
   text-decoration: none;
 }
 
-.recipe-card-tag {
-  font-size: 13px;
+.recipe-card-tag, .recipe-details-tag {
+  /* font-size: 13px; */
   border-style: solid;
   border-width: 1px;
   border-color: #960000;
@@ -97,51 +97,115 @@ body {
   color: #960000;
 }
 
-.recipe-card-tags a::after {
+.recipe-card-tag {
+  font-size: 13px;
+}
+
+.recipe-details-tag {
+  font-size: 16px;
+}
+
+.recipe-card-tags a::after, .recipe-details-tags a::after {
   content: "";
   margin-left: 3px;
 }
 
-.recipe-card-tag:hover {
+.recipe-card-tag:hover, .recipe-details-tag:hover {
   background-color: #b87474;
 }
 
-.recipe-card-tag.vegetarian {
+.recipe-card-tag.vegetarian, .recipe-detail-tags.vegetarian {
   border-color: #007d1b;
   background-color: #9dfab3;
   color: #007d1b;
 }
 
-.recipe-card-tag.vegetarian:hover {
+.recipe-card-tag.vegetarian:hover, .recipe-detail-tags.vegetarian:hover {
   background-color: #7cc48d;
 }
 
-.recipe-card-tag.quick-meal {
+.recipe-card-tag.quick-meal, .recipe-details-tag.quick-meal {
   border-color: #676900;
   background-color: #faf89d;
   color: #676900;
 }
 
-.recipe-card-tag.quick-meal:hover {
+.recipe-card-tag.quick-meal:hover, .recipe-details-tag.quick-meal:hover {
   background-color: #c9c87f;
 }
 
-.recipe-card-tag.blue-apron {
+.recipe-card-tag.blue-apron, .recipe-details-tag.blue-apron {
   border-color: #0f346c;
   background-color: #9facf5;
   color: #0f346c;
 }
 
-.recipe-card-tag.blue-apron:hover {
+.recipe-card-tag.blue-apron:hover, .recipe-details-tag.blue-apron:hover {
   background-color: #7a85bf;
 }
 
-.recipe-card-tag.hello-fresh {
+.recipe-card-tag.hello-fresh, .recipe-details-tag.hello-fresh {
   border-color: #2e3d0a;
   background-color: #91c11e;
   color: #2e3d0a;
 }
 
-.recipe-card-tag.hello-fresh:hover {
+.recipe-card-tag.hello-fresh:hover, .recipe-details-tag.hello-fresh:hover {
   background-color: #6a8c16;
+}
+
+.recipe-details-title {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.recipe-details-download {
+  color: #c9c9c9;
+}
+
+.recipe-details-download:hover {
+  color: #8c4242;
+}
+
+.recipe-details-image {
+  background-size: cover;
+  background-position: center;
+}
+
+.details-section-title {
+  font-size: 19px;
+  font-weight: 600;
+  color: #960000;
+  letter-spacing: 0.1em;
+}
+
+.info-item-icon {
+  color: #8c4242;
+}
+
+.info-item-heading {
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #960000;
+}
+
+.notes-list, .ingredients-list {
+  margin-bottom: 0;
+}
+
+.notes-list-item, .ingredients-list-item {
+  list-style-position: inside;
+}
+
+.recipe-details-description {
+  line-height: 2;
+}
+
+.recipe-details-image {
+  min-height: 150px;
+}
+
+.directions-item-title {
+  font-size: 18px;
+  letter-spacing: 0.04em;
 }
