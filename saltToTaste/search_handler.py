@@ -3,10 +3,12 @@ from saltToTaste.models import db, Recipe, Tag, Ingredient, Note, Direction
 
 def search_parser(search_data):
     # Format search data to allow for AND/OR keywords for Whoosh indexing
-    search_items = search_data.lower().replace(' or ', ' OR ' ).replace(' and ', ' AND ').split(',')
+    formatted_data = []
+    for item in search_data:
+        formatted_data.append(item.lower().replace(' or ', ' OR ' ).replace(' and ', ' AND '))
     search_dict = defaultdict(list)
     # Organize search terms
-    for item in search_items:
+    for item in formatted_data:
         if 'title:' in item:
             search_dict['title'].append(item.replace('title:', ''))
         elif 'tag:' in item:

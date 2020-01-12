@@ -3,7 +3,6 @@ from flask_login import login_user, logout_user, current_user, login_required
 from saltToTaste.extensions import db
 from saltToTaste.models import Recipe, Tag, Direction, Ingredient, Note
 from saltToTaste.search_handler import search_parser
-from saltToTaste.recipe_handler import ingredient_split
 from saltToTaste.database_handler import get_recipes, get_recipe_by_title_f
 
 main = Blueprint('main', __name__)
@@ -13,7 +12,7 @@ def index():
     recipes = sorted(get_recipes(), key = lambda i: i['title'])
 
     if request.method == 'POST':
-        search_data = request.form['search']
+        search_data = request.form.getlist('taggles[]')
         if search_data:
             results = search_parser(search_data)
             return render_template("index.html", recipes=results)
@@ -24,10 +23,7 @@ def index():
 def recipe(recipe_link):
     recipe = get_recipe_by_title_f(recipe_link)
 
-    # Split ingredients into two lists
-    ingredients_list = ingredient_split(recipe['ingredients'])
-
-    return render_template("recipe.html", recipe=recipe, ingredients_list=ingredients_list)
+    return render_template("recipe.html", recipe=recipe)
 
 @main.route("/download/<path:filename>")
 # @login_required

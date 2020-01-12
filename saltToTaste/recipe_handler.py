@@ -74,14 +74,6 @@ def recipe_formater(recipe):
     recipe['notes'] = [x.lstrip('- ') for x in recipe['notes']]
     return recipe
 
-def ingredient_split(ingredient_list):
-    list = ingredient_list
-    if len(list) % 2 != 0:
-        list.append("- ")
-    split = int(len(list)/2)
-    split_list = [list[0:split],list[split:]]
-    return split_list
-
 def delete_recipe_file(filename):
     file_path = f'./_recipes/{filename}'
     if os.path.exists(file_path):
