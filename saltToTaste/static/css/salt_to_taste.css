@@ -114,13 +114,13 @@ body {
   background-color: #b87474;
 }
 
-.recipe-card-tag.vegetarian, .recipe-detail-tags.vegetarian {
+.recipe-card-tag.vegetarian, .recipe-details-tag.vegetarian {
   border-color: #007d1b;
   background-color: #9dfab3;
   color: #007d1b;
 }
 
-.recipe-card-tag.vegetarian:hover, .recipe-detail-tags.vegetarian:hover {
+.recipe-card-tag.vegetarian:hover, .recipe-details-tag.vegetarian:hover {
   background-color: #7cc48d;
 }
 
