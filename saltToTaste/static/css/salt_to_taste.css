@@ -19,14 +19,14 @@ body {
 }
 
 .navbar {
-  padding: 0!important;
+  padding: 0 !important;
   -webkit-box-shadow: 0 8px 6px -6px rgba(0,0,0,.2);
   -moz-box-shadow: 0 8px 6px -6px rgba(0,0,0,.2);
   box-shadow: 0 8px 6px -6px rgba(0,0,0,.2);
 }
 
 .navbar-toggler {
-  border-color: transparent!important;
+  border-color: transparent !important;
 }
 
 .custom-toggler .navbar-toggler-icon {
@@ -34,7 +34,7 @@ body {
 }
 
 .search-help {
-  background-color: #ffffff!important;
+  background-color: #ffffff !important;
 }
 
 .search-help a {
@@ -54,7 +54,7 @@ body {
 }
 
 .nav-link.dropdown-toggle {
-  color: white!important;
+  color: white !important;
 }
 
 .body-container {
@@ -208,4 +208,14 @@ body {
 .directions-item-title {
   font-size: 18px;
   letter-spacing: 0.04em;
+}
+
+.login-header {
+  background-color: #960000;
+}
+
+/* Bootstrap overrides */
+.btn-primary {
+  background-color: #960000 !important;
+  border-color: #710000 !important;
 }
