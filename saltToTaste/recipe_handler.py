@@ -1,6 +1,10 @@
 import os, re, requests
 from collections import defaultdict
-from  datetime import datetime
+from datetime import datetime
+from saltToTaste.parser_handler import argparser_results
+
+argument = argparser_results()
+DATA_DIR = os.path.abspath(argument['DATA_DIR'])
 
 def recipe_importer(directory):
     list = []
@@ -84,23 +88,23 @@ def delete_recipe_file(filename):
         return False
 
 def delete_recipe_image(image):
-    image_path = f'./saltToTaste/static/recipe_images/{image}'
+    image_path = f'{DATA_DIR}/_images/{image}'
     if os.path.exists(image_path):
         os.remove(image_path)
         print (f' - Deleting {image} from disk')
 
 def download_image(link, title_formatted):
     r = requests.get(link)
-    open(f'./saltToTaste/static/recipe_images/{title_formatted}.jpg', 'wb').write(r.content)
+    open(f'{DATA_DIR}/_images/{title_formatted}.jpg', 'wb').write(r.content)
     print (f' + Saved {title_formatted}.jpg to disk')
 
 def add_recipe_file(recipe_data):
     formatted_title = recipe_data["title"].replace(" ", "_").lower()
-    f = open(f'./_recipes/{formatted_title}.txt', 'w+', encoding='utf-16')
+    f = open(f'{DATA_DIR}/_recipes/{formatted_title}.txt', 'w+', encoding='utf-16')
     f.seek(0)
     f.write(f'layout: {recipe_data["layout"]}\n')
     f.write(f'title: "{recipe_data["title"]}"\n')
-    f.write(f'image: {formatted_title}.jpg\n')
+    f.write(f'image: {recipe_data["image"] or ""}\n')
     f.write(f'imagecredit: {recipe_data["imagecredit"] or ""}\n')
     tags = ""
     if recipe_data['tags']:
