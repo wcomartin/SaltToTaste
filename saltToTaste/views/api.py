@@ -8,6 +8,10 @@ from saltToTaste.models import Recipe
 from saltToTaste.database_handler import get_recipes, get_recipe, delete_recipe, add_recipe, update_recipe
 from saltToTaste.search_handler import search_parser
 from saltToTaste.recipe_handler import delete_recipe_file, delete_recipe_image, add_recipe_file, download_image
+from saltToTaste.parser_handler import argparser_results
+
+argument = argparser_results()
+DATA_DIR = os.path.abspath(argument['DATA_DIR'])
 
 api = Blueprint('api', __name__)
 
@@ -52,7 +56,7 @@ def add_recipe_json():
         'layout' : data.get('layout') or 'recipe',
         'title' : data.get('title'),
         'formatted_title' : title_formatted,
-        'image' : f'{title_formatted}.jpg',
+        'image' : data.get('image'),
         'imagecredit' : data.get('image_credit'), # this is the link to image to download
         'tags' : data.get('tags'),
         'source' : data.get('source'),
@@ -71,9 +75,11 @@ def add_recipe_json():
     if not recipe['title']:
         return jsonify({'error' : 'title missing'})
 
-    download_image(recipe['imagecredit'], title_formatted)
+    if recipe['imagecredit']:
+        download_image(recipe['imagecredit'], title_formatted)
+        recipe['image'] = f"{title_formatted}.jpg"
     add_recipe_file(recipe)
-    recipe['last_modified'] = datetime.fromtimestamp(os.stat(f'./_recipes/{recipe["filename"]}').st_mtime)
+    recipe['last_modified'] = datetime.fromtimestamp(os.stat(f'{DATA_DIR}/_recipes/{recipe["filename"]}').st_mtime)
     add_recipe(recipe)
     return jsonify({'success' : 'Recipe added'})
 
@@ -137,13 +143,13 @@ def update_recipes_json(recipe_id):
         delete_recipe(recipe_query.id)
         download_image(recipe['imagecredit'], title_formatted)
         add_recipe_file(recipe)
-        recipe['last_modified'] = datetime.fromtimestamp(os.stat(f'./_recipes/{recipe["filename"]}').st_mtime)
+        recipe['last_modified'] = datetime.fromtimestamp(os.stat(f'{DATA_DIR}/_recipes/{recipe["filename"]}').st_mtime)
         add_recipe(recipe)
 
         return jsonify({'success' : 'recipe updated', 'note' : 'recipe ID was changed'})
 
     add_recipe_file(recipe)
-    recipe['last_modified'] = datetime.fromtimestamp(os.stat(f'./_recipes/{recipe["filename"]}').st_mtime)
+    recipe['last_modified'] = datetime.fromtimestamp(os.stat(f'{DATA_DIR}/_recipes/{recipe["filename"]}').st_mtime)
     update_recipe(recipe)
 
     return jsonify({'success' : 'recipe updated'})
@@ -152,7 +158,7 @@ def update_recipes_json(recipe_id):
 @require_apikey
 def delete_recipe_json(recipe_id):
     recipe = Recipe.query.filter(Recipe.id == recipe_id).first()
-    file = os.path.exists(f'./_recipes/{recipe.filename}')
+    file = os.path.exists(f'{DATA_DIR}/_recipes/{recipe.filename}')
     if recipe and file:
         delete_recipe_file(recipe.filename)
         delete_recipe_image(recipe.image_path)
