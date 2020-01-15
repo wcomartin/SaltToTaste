@@ -47,34 +47,38 @@ def add_recipe(recipe_data):
             recipe.filename = recipe_data['filename']
         db.session.add(recipe)
 
-        for t in recipe_data['tags']:
-            if not Tag.query.filter(Tag.name == t).first():
-                tag = Tag(name=t)
-                db.session.add(tag)
-            # Create Recipe-Tag mapping (creates entry in recipe_tag_assoc)
-            tag = Tag.query.filter(Tag.name == t).first()
-            recipe.tags.append(tag)
+        if recipe_data['tags']:
+            for t in recipe_data['tags']:
+                if not Tag.query.filter(Tag.name == t).first():
+                    tag = Tag(name=t)
+                    db.session.add(tag)
+                # Create Recipe-Tag mapping (creates entry in recipe_tag_assoc)
+                tag = Tag.query.filter(Tag.name == t).first()
+                recipe.tags.append(tag)
 
-        for i in recipe_data['ingredients']:
-            if not Ingredient.query.filter(Ingredient.name == i).first():
-                ingredient = Ingredient(name=i)
-                db.session.add(ingredient)
-            ingredient = Ingredient.query.filter(Ingredient.name == i).first()
-            recipe.ingredients.append(ingredient)
+            if recipe_data['ingredients']:
+                for i in recipe_data['ingredients']:
+                    if not Ingredient.query.filter(Ingredient.name == i).first():
+                        ingredient = Ingredient(name=i)
+                        db.session.add(ingredient)
+                    ingredient = Ingredient.query.filter(Ingredient.name == i).first()
+                    recipe.ingredients.append(ingredient)
 
-        for d in recipe_data['directions']:
-            if not Direction.query.filter(Direction.name == d).first():
-                direction = Direction(name=d)
-                db.session.add(direction)
-            direction = Direction.query.filter(Direction.name == d).first()
-            recipe.directions.append(direction)
+            if recipe_data['directions']:
+                for d in recipe_data['directions']:
+                    if not Direction.query.filter(Direction.name == d).first():
+                        direction = Direction(name=d)
+                        db.session.add(direction)
+                    direction = Direction.query.filter(Direction.name == d).first()
+                    recipe.directions.append(direction)
 
-        for n in recipe_data['notes']:
-            if not Note.query.filter(Note.name == n).first():
-                note = Note(name=n)
-                db.session.add(note)
-            note = Note.query.filter(Note.name == n).first()
-            recipe.notes.append(note)
+            if recipe_data['notes']:
+                for n in recipe_data['notes']:
+                    if not Note.query.filter(Note.name == n).first():
+                        note = Note(name=n)
+                        db.session.add(note)
+                    note = Note.query.filter(Note.name == n).first()
+                    recipe.notes.append(note)
 
         db.session.commit()
 
