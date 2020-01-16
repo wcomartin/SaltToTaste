@@ -45,6 +45,14 @@ body {
   color: #8c4242;
 }
 
+#search-field .taggle_placeholder {
+    padding-top: 1px;
+}
+
+#search-field .taggle_list {
+    margin-top: -6px;
+}
+
 .nav-link {
   font-size: 18px;
 }
