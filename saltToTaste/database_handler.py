@@ -12,6 +12,13 @@ def get_recipe(recipe_id):
     except:
         return False
 
+def get_recipe_by_title(title):
+    recipe = Recipe.query.filter(Recipe.title == title).first()
+    try:
+        return recipe.api_model()
+    except:
+        return False
+
 def get_recipe_by_title_f(title_formatted):
     recipe = Recipe.query.filter(Recipe.title_formatted == title_formatted).first()
     try:
