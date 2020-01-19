@@ -1,0 +1,182 @@
+{% extends "layout.html" %}
+
+{% block title_container %}
+<title>Salt To Taste</title>
+{% endblock %}
+
+{% block body_container %}
+  <div class="container mt-1">
+    <h1 class="form-title">Add Recipe</h1>
+    <form class="needs-validation" method="post" enctype=multipart/form-data action="/add" novalidate>
+      {{ form.csrf_token }}
+      <div class="form-row d-none">
+        <div class="form-group col-12">
+          <label for="form-recipe-layout">Layout:</label>
+          <select class="form-control" id="form-recipe-layout" name="layout">
+            <option value="recipe">Recipe</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row row-cols-1 row-cols-md-2">
+        <div class="col order-2 order-md-1">
+          <div class="form-row">
+            <div class="form-group col-12">
+              <!-- <label for="form-recipe-name">Name</label> -->
+              <input type="text" class="form-control {% if form.title.errors %}is-invalid{% endif %}" id="form-recipe-name" name="title" placeholder="Name" {% if form.title.data %}value="{{ form.title.data }}"{% endif %}>
+              <div class="invalid-feedback">
+                {% if form.title.errors %}
+                {{ form.title.errors[0] }}
+                {% endif %}
+              </div>
+            </div>
+            <div class="form-group col-12 col-md">
+              <!-- <label for="form-recipe-source">Source</label> -->
+              <input type="text" class="form-control {% if form.source.errors %}is-invalid{% endif %}" id="form-recipe-source" name="source" placeholder="Source" {% if form.source.data %}value="{{ form.source.data }}"{% endif %}>
+              <div class="invalid-feedback">
+                {% if form.source.errors %}
+                {{ form.source.errors[0] }}
+                {% endif %}
+              </div>
+            </div>
+            <div class="form-group col-12 col-md">
+              <!-- <label for="form-recipe-tags">Tags</label> -->
+              <input type="text" class="form-control {% if form.tags.errors %}is-invalid{% endif %}" id="form-recipe-tags" name="tags" placeholder="Tags" {% if form.tags.data %}value="{{ form.tags.data }}"{% endif %}>
+              <div class="invalid-feedback">
+                {% if form.tags.errors %}
+                {{ form.tags.errors[0] }}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12 col-md">
+              <!-- <label for="form-recipe-prep">Prep Time</label> -->
+              <input type="text" class="form-control {% if form.prep.errors %}is-invalid{% endif %}" id="form-recipe-prep" name="prep" placeholder="Prep Time {% if form.prep.data %}value="{{ form.prep.data }}"{% endif %}">
+              <div class="invalid-feedback">
+                {% if form.prep.errors %}
+                {{ form.prep.errors[0] }}
+                {% endif %}
+              </div>
+            </div>
+            <div class="form-group col-12 col-md">
+              <!-- <label for="form-recipe-cook">Cook Time</label> -->
+              <input type="text" class="form-control {% if form.cook.errors %}is-invalid{% endif %}" id="form-recipe-cook" name="cook" placeholder="Cook Time" {% if form.cook.data %}value="{{ form.cook.data }}"{% endif %}>
+              <div class="invalid-feedback">
+                {% if form.cook.errors %}
+                {{ form.cook.errors[0] }}
+                {% endif %}
+              </div>
+            </div>
+            <div class="form-group col-12 col-md">
+              <!-- <label for="form-recipe-ready">Ready In</label> -->
+              <input type="text" class="form-control {% if form.ready.errors %}is-invalid{% endif %}" id="form-recipe-ready" name="ready" placeholder="Ready In" {% if form.ready.data %}value="{{ form.ready.data }}"{% endif %}>
+              <div class="invalid-feedback">
+                {% if form.ready.errors %}
+                {{ form.ready.errors[0] }}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12 col-md">
+              <!-- <label for="form-recipe-servings">Servings</label> -->
+              <input type="text" class="form-control {% if form.servings.errors %}is-invalid{% endif %}" id="form-recipe-servings" name="servings" placeholder="Servings" {% if form.servings.data %}value="{{ form.servings.data }}"{% endif %}>
+              <div class="invalid-feedback">
+                {% if form.servings.errors %}
+                {{ form.servings.errors[0] }}
+                {% endif %}
+              </div>
+            </div>
+            <div class="form-group col-12 col-md">
+              <!-- <label for="form-recipe-calories">Calories</label> -->
+              <input type="text" class="form-control {% if form.calories.errors %}is-invalid{% endif %}" id="form-recipe-calories" name="calories" placeholder="Calories" {% if form.calories.data %}value="{{ form.calories.data }}"{% endif %}>
+              <div class="invalid-feedback">
+                {% if form.calories.errors %}
+                {{ form.calories.errors[0] }}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col order-1 order-md-2 pb-3 pb-md-0">
+          <div class="d-flex position-relative justify-content-center align-items-center image-upload-container {% if form.image.errors %}is-invalid{% endif %}">
+            <label class="btn add-image-btn"> Choose image...
+              <input type="file" class="custom-file-input d-none" id="form-recipe-image" name="image">
+            </label>
+            <div class="position-absolute w-100 border rounded image-container {% if form.image.errors %}invalid-image{% endif %}" id="selected-image">
+            </div>
+          </div>
+          <div class="invalid-feedback">
+            {% if form.image.errors %}
+            {{ form.image.errors[0] }}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <!-- <label for="form-recipe-description">Description</label> -->
+        <textarea class="form-control {% if form.description.errors %}is-invalid{% endif %}" id="form-recipe-description" rows="3" name="description" placeholder="Description" {% if form.description.data %}value="{{ form.description.data }}"{% endif %}></textarea>
+        <div class="invalid-feedback">
+          {% if form.description.errors %}
+          {{ form.description.errors[0] }}
+          {% endif %}
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Notes</label>
+        <div>
+          <button class="btn btn-success add-note" type="button">Add note</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Ingredients</label>
+        <div>
+          <button class="btn btn-success add-ingredient" type="button">Add ingredient</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Directions</label>
+        <div>
+          <button class="btn btn-success add-direction" type="button">Add direction</button>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-8">
+          <input type="submit" name="save" value="Save Recipe" class="btn btn-primary btn-block">
+        </div>
+        <div class="col-4">
+          <input type="submit" name="save_and_add" value="Save and add another" class="btn btn-primary btn-block">
+        </div>
+      </div>
+    </form>
+
+    <!-- Form fields that get added on click -->
+    <div class="d-none">
+      <div class="input-group mb-3" id="note-template">
+        <input type="text" class="form-control" name="notes" placeholder="Note">
+        <div class="input-group-append">
+          <button class="btn btn-danger remove" type="button"><i class="fas fa-minus"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-none">
+      <div class="input-group mb-3" id="ingredient-template">
+        <input type="text" class="form-control" name="ingredients" placeholder="Ingredient">
+        <div class="input-group-append">
+          <button class="btn btn-danger remove" type="button"><i class="fas fa-minus"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-none">
+      <div class="input-group mb-3" id="direction-template">
+        <input type="text" class="form-control" name="directions" placeholder="Direction">
+        <div class="input-group-append">
+          <button class="btn btn-danger remove" type="button"><i class="fas fa-minus"></i></button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+{% endblock %}
