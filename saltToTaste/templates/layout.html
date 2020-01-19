@@ -13,6 +13,7 @@
     <script src="/static/js/bootstrap.bundle.js"></script>
     <script src="/static/js/taggle.js"></script>
     <script src="/static/js/clamp.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
     {% block title_container %}
     {% endblock %}
   </head>
@@ -60,6 +61,18 @@
       </div>
     </nav>
     <div class="body-container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      {% for category, message in messages %}
+      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
       {% block body_container %}
       {% endblock %}
     </div>
@@ -160,14 +173,86 @@
     </div>
     <!-- End of Modals -->
     <script>
+      // Script to make tags
       var taggle = new Taggle('search-field');
       function tagSearch(tag) {
         console.log(tag)
         taggle.add(tag)
         document.forms[0].submit()
       }
+      // Script to clamp text
       $('.clampThis').each(function(index, element) {
         $clamp(element, { clamp: 2});
+      });
+
+      // bsCustomFileInput
+      $(document).ready(function () {
+        bsCustomFileInput.init()
+      })
+      // Preview selected image
+      document.getElementById('form-recipe-image').addEventListener('change', readURL, true);
+        function readURL(){
+            var file = document.getElementById("form-recipe-image").files[0];
+            var reader = new FileReader();
+            reader.onloadend = function(){
+                document.getElementById('selected-image').style.backgroundImage = "url(" + reader.result + ")";
+            }
+            if(file){
+                reader.readAsDataURL(file);
+            }else{
+            }
+        }
+      // Add or remove notes/ingredients/directions
+      $(document).ready(function() {
+        var noteCount = 0;
+        var ingredientCount = 0;
+        var directionCount = 0
+
+        var lastNote = $(".note-field").last().attr("name");
+        if (lastNote) {
+          lastNote = lastNote.replace("notes-", "")
+          var noteCount = lastNote + 1;
+        }
+        var lastIngredient = $(".ingredient-field").last().attr("name");
+        if (lastIngredient) {
+          lastIngredient = lastIngredient.replace("notes-", "")
+          var ingredientCount = lastIngredient + 1;
+        }
+        var lastDirection = $(".direction-field").last().attr("name");
+        if (lastDirection) {
+          lastDirection = lastDirection.replace("notes-", "")
+          var directionCount = lastDirection + 1;
+        }
+
+        $(".add-note").click(function(){
+          var clone = $('#note-template').clone();
+          clone.removeAttr("id")
+          clone.find('.form-control').attr("name", "notes-" + noteCount).addClass("note-field");
+          $(".add-note").before(clone);
+          noteCount++;
+        });
+
+        $(".add-ingredient").click(function(){
+          var clone = $('#ingredient-template').clone();
+          clone.removeAttr("id")
+          clone.find('.form-control').attr("name", "ingredients-" + noteCount).addClass("ingredient-field");
+          $(".add-ingredient").before(clone);
+          ingredientCount++;
+        });
+
+        $(".add-direction").click(function(){
+          var clone = $('#direction-template').clone();
+          clone.removeAttr("id")
+          clone.find('.form-control').attr("name", "directions-" + noteCount).addClass("direction-field");
+          $(".add-direction").before(clone);
+          directionCount++;
+        });
+
+
+        $("body").on("click",".remove",function(){
+          $(this).parents(".input-group").remove();
+        });
+
       });
     </script>
   </body>
