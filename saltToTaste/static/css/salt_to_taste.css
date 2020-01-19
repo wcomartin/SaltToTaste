@@ -219,6 +219,37 @@ body {
   color: #212529;
 }
 
+.form-title {
+  color: #960000;
+  /* letter-spacing: 0.1em; */
+}
+
+.image-upload-container {
+  height: 200px;
+}
+
+.btn.add-image-btn {
+  z-index: 1;
+  color: #fff;
+  border-color: #00000000;
+  background-color: #3e3e3e70;
+}
+
+.btn.add-button-btn:hover {
+  color: #fff !important;
+}
+
+.image-container {
+  height: 200px;
+  border-color: #ced4da !important;
+  background-size: cover;
+  background-position: center;
+}
+
+.invalid-image {
+  border-color: red !important;
+}
+
 /* Bootstrap overrides */
 .btn-primary {
   background-color: #960000 !important;
